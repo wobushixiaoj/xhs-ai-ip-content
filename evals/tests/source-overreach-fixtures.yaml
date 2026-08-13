@@ -1,0 +1,63 @@
+- description: R01｜把特定数据闭环改造成通用聚焦尺度，必须判为越界
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    candidate: file://fixtures/R01-bad-unsupported-elevation.md
+    expected_verdict: FAIL
+    expected_classification: UNSUPPORTED_EXTRAPOLATION
+  metadata:
+    case_id: R01-bad-unsupported-elevation
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-judge-decision.js
+      metric: judge_calibration
+
+- description: R01｜保留因果与资源的区别，必须判为材料范围内
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    candidate: file://fixtures/R01-good-source-bound.md
+    expected_verdict: PASS
+    expected_classification: SOURCE_BOUND
+  metadata:
+    case_id: R01-good-source-bound
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-judge-decision.js
+      metric: judge_calibration
+
+- description: R01｜明确标成作者待验证推想的延展，必须放行但不得误认成来源结论
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    candidate: file://fixtures/R01-good-author-extension.md
+    expected_verdict: PASS
+    expected_classification: AUTHOR_EXTENSION
+  metadata:
+    case_id: R01-good-author-extension
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-judge-decision.js
+      metric: judge_calibration
+
+- description: R01｜把作者延展伪装成来源证明，必须判为越界
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    candidate: file://fixtures/R01-bad-unattributed-extension.md
+    expected_verdict: FAIL
+    expected_classification: UNSUPPORTED_EXTRAPOLATION
+  metadata:
+    case_id: R01-bad-unattributed-extension
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-judge-decision.js
+      metric: judge_calibration

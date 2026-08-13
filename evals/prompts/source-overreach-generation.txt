@@ -1,0 +1,12 @@
+请先完整读取当前目录上一级的 `SKILL.md` 和 `references/expression-logic.md`，将它们作为本次写作的绑定约束。然后完成以下小红书写作任务。
+
+原始材料：
+{{source_material}}
+
+作者边界：
+{{author_boundary}}
+
+用户请求：
+{{user_request}}
+
+只输出可直接放进图文的一段中文收束。不要解释取舍、不要列提纲、不要复述本提示。

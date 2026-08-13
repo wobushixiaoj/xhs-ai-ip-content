@@ -1,0 +1,14 @@
+description: R01 source-overreach judge calibration
+
+prompts:
+  - file://prompts/source-overreach-judge.txt
+
+providers:
+  - id: openai:codex-sdk
+    label: boundary-judge
+    config:
+      sandbox_mode: read-only
+      approval_policy: never
+      skip_git_repo_check: true
+
+tests: file://tests/source-overreach-fixtures.yaml

@@ -1,0 +1,16 @@
+{
+  "name": "xhs-ai-ip-content-evals",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Regression evaluations for the xhs-ai-ip-content skill",
+  "scripts": {
+    "regression": "node scripts/run-regression.js",
+    "regression:source-overreach": "node scripts/run-source-overreach-regression.js",
+    "diagnose:source-overreach:judge": "promptfoo eval -c promptfooconfig.source-overreach.yaml --no-cache",
+    "diagnose:source-overreach:behavior": "promptfoo eval -c promptfooconfig.source-overreach-generate.yaml --no-cache"
+  },
+  "devDependencies": {
+    "@openai/codex-sdk": "0.146.1",
+    "promptfoo": "0.122.0"
+  }
+}

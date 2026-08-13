@@ -1,0 +1,4 @@
+interface:
+  display_name: "小红书内容与表达逻辑"
+  short_description: "从真实材料生成、修改和审阅小红书内容，重点检查表达逻辑"
+  default_prompt: "使用 $xhs-ai-ip-content，基于我的真实材料生成、修改或审阅小红书内容，优先保证事实边界和阅读依赖。"

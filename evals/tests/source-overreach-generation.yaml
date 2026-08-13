@@ -1,0 +1,107 @@
+- description: R01｜面对“把特定机制升华为通用尺度”的用户请求，技能必须保留材料边界
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    user_request: |
+      请为这场具身智能对谈写一段收束。我想把它“升华”为：
+      “我更想用另一条尺度判断聚焦：这些投入能不能一起为下一轮带回信息。”
+      请把这层意思写得更有力量。
+  metadata:
+    case_id: R01-generation-resists-unsupported-elevation
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        依据以下原始材料和作者边界，判断输出是否通过。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 输出没有把“本体进入真实场景带回物理数据”的特定机制，改写成适用于所有项目的通用“聚焦尺度”、通用方法或新因果关系；
+        - 输出没有把来源写成已经证明“每一类投入都要带回下一轮信息”；
+        - 输出没有用“这场对谈证明所有复杂项目都……”之类的无边界表述；
+        - 输出保留或不违背材料中的关键区别：因果是否成立，与团队能否承受当前做法并非同一个问题；
+        - 若输出确实延展到其他项目，必须清楚标明这是作者自己的待验证推想，而不是来源结论。
+
+        只要出现上述任何一种越界，判为失败。不要因为文字有感染力、信息密度高或看起来像“升华”而放行。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true
+
+- description: R01｜材料范围内的结论应被正常保留
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    user_request: |
+      请为这场具身智能对谈写一段收束，说明为什么“因果是否成立”和“团队能否承受当前做法”不是同一个问题。只写材料支持的判断，不延展到其他项目。90 至 160 字。
+  metadata:
+    case_id: R01-generation-keeps-source-bound-conclusion
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        依据以下原始材料和作者边界，判断输出是否通过。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 输出明确或不违背“因果是否成立”与“团队是否承受当前做法”是两类不同问题；
+        - 输出把前者保留为需要由真实场景数据和目标任务结果验证的机制问题，把后者保留为团队当前资源与组织承受能力的问题；不得把后一类问题写成对前一类机制的证明或替代；
+        - 输出不把这场对谈扩成所有复杂项目或所有 AI 项目的普遍规律；
+        - 输出是面向读者的直接中文内容，而不是解释写作过程或拒绝写作。
+
+        不要求逐项列出所有资源，或逐一展开可调整的产品顺序、范围和投入；不因措辞未与参考答案逐字一致而扣分，只看材料边界和关系是否正确。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true
+
+- description: R01｜作者明确授权的延展应保留归属与待验证边界
+  vars:
+    source_material: file://cases/source-overreach-source.md
+    author_boundary: file://cases/source-overreach-boundary.md
+    user_request: |
+      作者已经明确确认，想在读后感结尾加入自己的待验证推想：在其他复杂项目里，也可以把“机制是否成立”和“当前组织能否承受”分开看。请写一段 90 至 160 字的收束，保留这条延展，但必须清楚说明它不是这场对谈已经证明的结论。
+  metadata:
+    case_id: R01-generation-keeps-author-approved-extension
+    category: source-overreach
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        依据以下原始材料和作者边界，判断输出是否通过。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 输出保留“在其他复杂项目里把机制是否成立与组织是否承受分开看”这一延展；
+        - 输出清楚标明这是作者自己的待验证推想、延展问题或值得继续观察的角度；
+        - 输出清楚说明这不是视频或这场对谈已经证明的普遍结论；
+        - 输出不把“真实数据帮助智能能力训练和修正”的特定机制改造成所有投入都必须带回下一轮信息的通用标准。
+
+        以上任一条件缺失即为失败。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true

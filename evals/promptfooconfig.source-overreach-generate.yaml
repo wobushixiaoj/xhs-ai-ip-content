@@ -1,0 +1,15 @@
+description: R01 source-overreach production-skill behavior
+
+prompts:
+  - file://prompts/source-overreach-generation.txt
+
+providers:
+  - id: openai:codex-sdk
+    label: content-generator
+    config:
+      sandbox_mode: read-only
+      approval_policy: never
+      skip_git_repo_check: true
+      model_reasoning_effort: medium
+
+tests: file://tests/source-overreach-generation.yaml
