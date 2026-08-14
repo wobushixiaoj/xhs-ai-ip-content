@@ -1,7 +1,7 @@
-description: R01 source-overreach production-skill behavior
+description: R02/R03 production-skill behavior
 
 prompts:
-  - file://prompts/source-overreach-generation.txt
+  - file://prompts/reading-dependency-generation.txt
 
 providers:
   - id: openai:codex-sdk
@@ -13,4 +13,4 @@ providers:
       model_reasoning_effort: medium
       # XHS_EVAL_MODEL
 
-tests: file://tests/source-overreach-generation.yaml
+tests: file://tests/reading-dependency-generation.yaml

@@ -1,11 +1,11 @@
-description: R01 source-overreach production-skill behavior
+description: R04 carousel prompt production-skill behavior
 
 prompts:
-  - file://prompts/source-overreach-generation.txt
+  - file://prompts/carousel-prompt-generation.txt
 
 providers:
   - id: openai:codex-sdk
-    label: content-generator
+    label: carousel-prompt-generator
     config:
       sandbox_mode: read-only
       approval_policy: never
@@ -13,4 +13,4 @@ providers:
       model_reasoning_effort: medium
       # XHS_EVAL_MODEL
 
-tests: file://tests/source-overreach-generation.yaml
+tests: file://tests/carousel-prompt-generation.yaml

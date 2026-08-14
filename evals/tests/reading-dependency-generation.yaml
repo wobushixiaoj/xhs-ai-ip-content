@@ -1,0 +1,70 @@
+- description: R02｜观点先行的开头必须在第一阅读团块建立对象与矛盾
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    user_request: |
+      请写一段 100 至 160 字的图文开头。可以先给出你对“聚焦”的判断，但第一完整阅读团块必须让零上下文读者知道：这是什么对谈、团队正在面对什么选择或矛盾。不要用小标题或写作说明。
+  metadata:
+    case_id: R02-generation-builds-entry-context
+    category: reader-context
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        依据以下原始材料和作者边界，判断输出是否通过。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 输出的第一完整阅读团块让读者知道内容由星海图具身智能对谈引出，或等价地识别具体对象；
+        - 该团块说明团队面对“大脑与本体”、真实数据是否改善目标任务或资源承受中的至少一个真实选择或矛盾；
+        - 即使观点先行，也不能先让“真正的聚焦”“复杂度”“反馈”等抽象结论独自承担入口；
+        - 不把材料扩成所有复杂项目或所有 AI 项目的普遍规律；
+        - 输出是面向读者的直接中文内容，不解释写作过程。
+
+        任一条件不满足即失败。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true
+
+- description: R03｜由对谈引出的开头不得虚构此前已讨论过该主题
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    user_request: |
+      请写一段 80 至 140 字的读后感开头。内容只是由这场对谈引出“聚焦”这个主题；作者此前没有谈过这个主题，也没有相关实践经历。只输出成品。
+  metadata:
+    case_id: R03-generation-avoids-false-history
+    category: author-history
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        依据以下原始材料和作者边界，判断输出是否通过。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 输出不声称作者此前已经谈过、重新讨论过、形成过相关立场或实践过同类问题；
+        - 输出可以写“看完这场对谈，我想谈谈聚焦”，但不能把本轮写作意图伪装成历史变化；
+        - 输出在入口中说明当前对象或情境，不只给出抽象结论；
+        - 输出不把材料扩成普遍规律。
+
+        任一条件不满足即失败。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true

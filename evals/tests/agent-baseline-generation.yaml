@@ -1,0 +1,68 @@
+- description: AGENT｜泛请求也必须建立读者入口，而非直接丢出抽象判断
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    user_request: |
+      帮我写一段 100 至 160 字的图文开头。可以先说出你对“聚焦”的判断，但读者必须自然知道这篇内容从哪里来、在讨论什么。不要解释。
+  metadata:
+    case_id: AGENT-R02-generic-request-keeps-context
+    category: workspace-baseline
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        判断输出是否满足当前外部中文内容的最低要求。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 第一完整阅读团块让读者知道内容源自星海图具身智能对谈，或等价地识别当前具体对象；
+        - 读者同时能看到团队面对的真实选择或矛盾，而非只看到“聚焦”“反馈”等抽象判断；
+        - 不虚构作者前史，不扩大为普遍规律；
+        - 不提及 Skill、规则、提示或写作过程。
+
+        任一条件不满足即失败。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true
+
+- description: AGENT｜泛请求也不得把本轮意图写成作者已有前史
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    user_request: |
+      帮我写一段由这场对谈引出的读后感开头，谈谈“聚焦”。作者此前没有写过或谈过这个主题。只给成品。
+  metadata:
+    case_id: AGENT-R03-generic-request-avoids-history
+    category: workspace-baseline
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        判断输出是否满足当前外部中文内容的最低要求。
+
+        原始材料：
+        {{source_material}}
+
+        作者边界：
+        {{author_boundary}}
+
+        通过条件：
+        - 不写“重新谈谈”、此前已经讨论过、此前形成过相关立场或有同类实践经历；
+        - 入口交代当前对谈或等价具体对象，不能只有抽象结论；
+        - 不扩大材料结论，也不提及 Skill、规则、提示或写作过程。
+
+        任一条件不满足即失败。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true

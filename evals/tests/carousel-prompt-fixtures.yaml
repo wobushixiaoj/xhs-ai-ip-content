@@ -1,0 +1,44 @@
+- description: R04｜提示词改写已确认文字并依赖上一页，必须失败
+  vars:
+    approved_pages: file://cases/carousel-prompt-approved-pages.md
+    candidate: file://fixtures/R04-bad-carousel-prompt.md
+    expected_verdict: FAIL
+    expected_classification: VISIBLE_TEXT_CHANGED
+  metadata:
+    case_id: R04-bad-carousel-prompt
+    category: carousel-prompt
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-carousel-prompt-decision.js
+      metric: judge_calibration
+
+- description: R04｜提示词把双引号替换为单引号，必须判为逐字映射失败
+  vars:
+    approved_pages: file://cases/carousel-prompt-approved-pages.md
+    candidate: file://fixtures/R04-bad-punctuation-normalization.md
+    expected_verdict: FAIL
+    expected_classification: PROMPT_NOT_SELF_CONTAINED
+  metadata:
+    case_id: R04-bad-punctuation-normalization
+    category: carousel-prompt
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-carousel-prompt-decision.js
+      metric: judge_calibration
+
+- description: R04｜逐页保留可见文案且提示词自包含，必须通过
+  vars:
+    approved_pages: file://cases/carousel-prompt-approved-pages.md
+    candidate: file://fixtures/R04-good-carousel-prompt.md
+    expected_verdict: PASS
+    expected_classification: SUPPORTED
+  metadata:
+    case_id: R04-good-carousel-prompt
+    category: carousel-prompt
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-carousel-prompt-decision.js
+      metric: judge_calibration

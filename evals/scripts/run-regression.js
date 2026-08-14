@@ -1,14 +1,14 @@
-const { execFileSync } = require('child_process');
-const path = require('path');
+const {
+  loadLocalEnv,
+  runNode,
+  validateWorkspace,
+  workspaceFromArgs,
+} = require('./regression-utils');
 
-const evalRoot = path.resolve(__dirname, '..');
-const runner = path.join(evalRoot, 'scripts', 'run-source-overreach-regression.js');
+loadLocalEnv();
+const workspace = validateWorkspace(workspaceFromArgs(process.argv.slice(2)));
+const workspaceArgs = ['--workspace', workspace];
 
-execFileSync(process.execPath, [runner], {
-  cwd: evalRoot,
-  env: {
-    ...process.env,
-    PROMPTFOO_DISABLE_TELEMETRY: '1',
-  },
-  stdio: 'inherit',
-});
+runNode('verify-workspace-agent.js', workspaceArgs);
+runNode('run-skill-regression.js');
+runNode('run-agent-baseline-regression.js', workspaceArgs);

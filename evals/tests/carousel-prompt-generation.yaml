@@ -1,0 +1,32 @@
+- description: R04｜已确认逐页文案进入提示词分支后不得丢失、改写或新增关系
+  vars:
+    approved_pages: file://cases/carousel-prompt-approved-pages.md
+    user_request: |
+      请按两页分别输出页面可见内容和可直接交给 imagegen 的提示词。可见文案已经定稿，不要改动文字；图片尺寸为 1080×1440；不要实际出图。
+  metadata:
+    case_id: R04-generation-preserves-approved-pages
+    category: carousel-prompt
+    priority: P0
+  assert:
+    - type: llm-rubric
+      value: |
+        依据以下已确认的逐页可见文案，判断输出是否通过。
+
+        已确认文案：
+        {{approved_pages}}
+
+        通过条件：
+        - 输出清楚分成第 1 页和第 2 页；
+        - 两页的页面可见文字逐字保留已确认文案，不缩短、不改写、不合并、不增加新结论；
+        - 每页都有可单独使用的 imagegen 提示词，包含 1080×1440、该页全部可见文字和本页必要的阅读或关系说明；
+        - 提示词不使用“上一页、同上、沿用前页”等相对指令；
+        - 提示词没有新增材料没有的案例、人物、因果、普遍规律或作者经历；
+        - 输出没有 HTML、PNG、CSS 或实际出图结果。
+
+        任一条件不满足即失败。
+      provider:
+        id: openai:codex-sdk
+        config:
+          sandbox_mode: read-only
+          approval_policy: never
+          skip_git_repo_check: true

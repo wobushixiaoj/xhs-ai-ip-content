@@ -1,0 +1,63 @@
+- description: R02｜抽象判断先于对象和矛盾，必须判为上下文缺失
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    candidate: file://fixtures/R02-bad-entry-without-object.md
+    expected_verdict: FAIL
+    expected_classification: ENTRY_CONTEXT_MISSING
+  metadata:
+    case_id: R02-bad-entry-without-object
+    category: reader-context
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-reading-decision.js
+      metric: judge_calibration
+
+- description: R02｜观点先行但同一团块交代对象和矛盾，必须通过
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    candidate: file://fixtures/R02-good-entry-with-context.md
+    expected_verdict: PASS
+    expected_classification: SUPPORTED
+  metadata:
+    case_id: R02-good-entry-with-context
+    category: reader-context
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-reading-decision.js
+      metric: judge_calibration
+
+- description: R03｜没有材料支持时虚构共同前史，必须判为不被支持的历史依赖
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    candidate: file://fixtures/R03-bad-unsupported-history.md
+    expected_verdict: FAIL
+    expected_classification: UNSUPPORTED_HISTORY
+  metadata:
+    case_id: R03-bad-unsupported-history
+    category: author-history
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-reading-decision.js
+      metric: judge_calibration
+
+- description: R03｜没有虚构前史且交代对象，必须通过
+  vars:
+    source_material: file://cases/reader-context-source.md
+    author_boundary: file://cases/reader-context-boundary.md
+    candidate: file://fixtures/R03-good-no-false-history.md
+    expected_verdict: PASS
+    expected_classification: SUPPORTED
+  metadata:
+    case_id: R03-good-no-false-history
+    category: author-history
+    priority: P0
+  assert:
+    - type: javascript
+      value: file://scripts/assert-reading-decision.js
+      metric: judge_calibration

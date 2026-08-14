@@ -10,5 +10,6 @@ providers:
       sandbox_mode: read-only
       approval_policy: never
       skip_git_repo_check: true
+      # XHS_EVAL_MODEL
 
 tests: file://tests/source-overreach-fixtures.yaml

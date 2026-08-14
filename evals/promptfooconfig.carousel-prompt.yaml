@@ -1,0 +1,15 @@
+description: R04 carousel prompt judge calibration
+
+prompts:
+  - file://prompts/carousel-prompt-judge.txt
+
+providers:
+  - id: openai:codex-sdk
+    label: carousel-prompt-judge
+    config:
+      sandbox_mode: read-only
+      approval_policy: never
+      skip_git_repo_check: true
+      # XHS_EVAL_MODEL
+
+tests: file://tests/carousel-prompt-fixtures.yaml

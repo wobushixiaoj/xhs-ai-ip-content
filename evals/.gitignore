@@ -1,3 +1,5 @@
 node_modules/
 .promptfoo/
 runs/
+.env.local
+.eval-config-*.yaml

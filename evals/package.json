@@ -5,9 +5,13 @@
   "description": "Regression evaluations for the xhs-ai-ip-content skill",
   "scripts": {
     "regression": "node scripts/run-regression.js",
+    "regression:skill": "node scripts/run-skill-regression.js",
+    "regression:agent": "node scripts/run-agent-baseline-regression.js",
     "regression:source-overreach": "node scripts/run-source-overreach-regression.js",
     "diagnose:source-overreach:judge": "promptfoo eval -c promptfooconfig.source-overreach.yaml --no-cache",
-    "diagnose:source-overreach:behavior": "promptfoo eval -c promptfooconfig.source-overreach-generate.yaml --no-cache"
+    "diagnose:source-overreach:behavior": "promptfoo eval -c promptfooconfig.source-overreach-generate.yaml --no-cache",
+    "diagnose:reading-dependency": "promptfoo eval -c promptfooconfig.reading-dependency.yaml --no-cache",
+    "diagnose:carousel-prompt": "promptfoo eval -c promptfooconfig.carousel-prompt.yaml --no-cache"
   },
   "devDependencies": {
     "@openai/codex-sdk": "0.146.1",
